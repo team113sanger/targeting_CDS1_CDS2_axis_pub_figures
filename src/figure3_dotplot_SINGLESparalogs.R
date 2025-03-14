@@ -6,8 +6,8 @@ library(readr)
 library(here)
 
 # Load the data
-whole_genome_screen_filtered <- read_csv(here("data/2nd_July_2024.csv"))
-
+whole_genome_screen_filtered <- read_csv(here("data/paralog_beta_values.csv"))
+whole_genome_screen_filtered
 # Reverse the levels of Gene
 whole_genome_screen_filtered$Gene <- factor(whole_genome_screen_filtered$Gene, levels = rev(sort(unique(whole_genome_screen_filtered$Gene))))
 

@@ -55,7 +55,7 @@ DotPlotFinal
 dev.off()
 
 ######### 25th June 24
-SinglesResults_ParalogPairDerived <- read.table(here("data/AHCYCL1.csv"),
+SinglesResults_ParalogPairDerived <- read.table(here("data/common_SL_hit_gi_scores.csv"),
                      header = TRUE, sep = ",") 
 jpeg(here("results/plots","2024_SinglesDotPlotParalogs25th_6_24(AHCYCL1_fix).jpeg"), 
     units = "in", width = 5.1, height = 7, res = 600)
