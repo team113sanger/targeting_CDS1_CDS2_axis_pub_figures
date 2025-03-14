@@ -1,5 +1,7 @@
 #  Targeting the CDS1/2 axis as a therapeutic strategy in uveal melanoma and pan-cancer Figures
 
+[![DOI](https://zenodo.org/badge/948453959.svg)](https://doi.org/10.5281/zenodo.15025727)
+
 ## Overview
 
 This repository contains a series of R scripts that were used in generating the final figures for **Targeting the CDS1/2 axis as a therapeutic strategy in uveal melanoma and pan-cancer**. It takes data generated in the related analyses in https://github.com/team113sanger/Targeting-the-CDS1-2-axis-as-a-therapeutic-strategy-in-uveal-melanoma-and-pan-cancer as inputs for plotting.
