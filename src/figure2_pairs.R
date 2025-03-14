@@ -1,12 +1,11 @@
 # Below is the R script for figures 2c and 2d. 
-# Recieved from Jen. email at 5.10pm on the 18th June 24.
-# Attached are the dataframes and prism files
+
 
 library(tidyverse)
 library(readxl)
 library(here)
 
-# Import data (Supp Table 6)
+# Import data from (Supp Table 6) Landscape of digenic dependencies in uveal melanoma 
 
 Supplementary_Table_6 <- read_excel(here("data/Supplementary Table 6.xlsx"), 
                                     skip =2)

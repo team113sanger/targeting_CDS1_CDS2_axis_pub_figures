@@ -7,8 +7,20 @@ library(ggplot2)
 library(ggrepel)
 library(here)
 
-# Import the data
-mageck_output <- read_tsv(here("data/mageck_output.tsv"))
+# Import the data from upstream steps
+# https://github.com/team113sanger/uveal_melanoma_CRISPR_downstream/blob/main/results/MAGeCK_gene_corrected_beta.tsv
+
+# https://github.com/team113sanger/uveal_melanoma_CRISPR_downstream/blob/main/results/MAGeCK_gene_corrected_fdr.tsv
+
+beta <- read_tsv("data/MAGeCK_gene_corrected_beta.tsv") |> 
+        pivot_longer(cols = -c(genes), names_to = "ModelName", values_to = "Beta")
+
+fdr <- read_tsv("data/MAGeCK_gene_corrected_fdr.tsv") |> 
+        pivot_longer(cols = -c(Gene), names_to = "ModelName", values_to = "FDR")
+
+mageck_output <- left_join(beta, fdr, by = c("genes" = "Gene", "ModelName")) |>
+dplyr::rename("Gene" = "genes")
+write_tsv(mageck_output, "data/mageck_output.tsv")
 
 mageck_output_sigs_ggplot <- mageck_output |>
   mutate(

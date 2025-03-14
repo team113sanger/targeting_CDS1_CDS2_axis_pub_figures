@@ -10,11 +10,13 @@ library(curl)
 
 # RNA_Seq data
 
-download.file("https://plus.figshare.com/ndownloader/files/43347204", destfile = "data/OmicsExpressionProteinCodingGenesTPMLogp1(23Q4).csv")
+download.file("https://plus.figshare.com/ndownloader/files/43347204", 
+                destfile = "data/OmicsExpressionProteinCodingGenesTPMLogp1(23Q4).csv")
 OmicsExpressionProteinCodingGenesTPMLogp1_23Q4_ <- read_csv(here("data/OmicsExpressionProteinCodingGenesTPMLogp1(23Q4).csv"))
 
 # CRISPR Dependency Data
-download.file("https://plus.figshare.com/ndownloader/files/43347204", destfile = "data/CRISPRGeneEffect_23Q4.csv")
+download.file("https://plus.figshare.com/ndownloader/files/43347204", 
+                destfile = "data/CRISPRGeneEffect_23Q4.csv")
 
 CRISPRGeneEffect_23Q4 <- read_csv(here("data/CRISPRGeneEffect_23Q4.csv"))
 

@@ -4,13 +4,16 @@ library(tidyverse)
 library(biomaRt)
 library(here)
 
-
+# Data from Dual guide analysis
+# https://github.com/team113sanger/uveal_melanoma_dual_guide_CRISPR/blob/master/DATA/postprocessing/combined_gene_level_results.scaled.tsv
 combined_singles_results_scaled <- read_delim(
     here("data/combined_singles_results.scaled.tsv"),
   delim = "\t", escape_double = FALSE,
   trim_ws = TRUE
 )
 
+# CEG from Hart et al
+# https://github.com/hart-lab/bagel/blob/master/CEGv2.txt
 CEGv2_copy <- read_delim(
     here("data/CEGv2.txt"),
   delim = "\t",
