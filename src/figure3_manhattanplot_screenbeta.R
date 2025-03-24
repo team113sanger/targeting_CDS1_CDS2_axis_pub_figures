@@ -3,10 +3,10 @@
 # Updated July 20 2024
 
 library(tidyverse)
-library(ggplot2)
 library(ggrepel)
 library(here)
-
+library(biomaRt)
+library(readxl)
 # Import the data from upstream steps
 # https://github.com/team113sanger/uveal_melanoma_CRISPR_downstream/blob/main/results/MAGeCK_gene_corrected_beta.tsv
 
@@ -18,8 +18,31 @@ beta <- read_tsv("data/MAGeCK_gene_corrected_beta.tsv") |>
 fdr <- read_tsv("data/MAGeCK_gene_corrected_fdr.tsv") |> 
         pivot_longer(cols = -c(Gene), names_to = "ModelName", values_to = "FDR")
 
+
+# Fetch Kosuke Yusa's gene ID mapping 
+download.file("https://ars.els-cdn.com/content/image/1-s2.0-S2211124716313353-mmc2.xlsx", destfile = "data/1-s2.0-S2211124716313353-mmc2.xlsx")
+hgnc_ids <- read_xlsx("data/1-s2.0-S2211124716313353-mmc2.xlsx", sheet = 2) |> 
+select(Gene, HGNC_ID) |> 
+distinct()
+
+
+hgnc_ids |> select(HGNC_ID) |> write_tsv("results/query_hgnc_ids.txt")
+
+# Biomart down at time of wiritng - fetch gene names from the HGNC ID manually 
+# Mart export 
+gene_id_update_map <- hgnc_ids |> 
+            left_join(read_tsv("data/mart_export.txt"), by = c("HGNC_ID" = "HGNC ID")) |> 
+            select(Gene, `Gene name`) |>
+            distinct() |> 
+            mutate(`Gene name`= case_when(is.na(`Gene name`) ~ Gene, TRUE ~ `Gene name`))
+
 mageck_output <- left_join(beta, fdr, by = c("genes" = "Gene", "ModelName")) |>
-dplyr::rename("Gene" = "genes")
+dplyr::rename("Gene" = "genes") |>
+left_join(gene_id_update_map, by = "Gene") |>
+select(-Gene) |>
+rename("Gene" = `Gene name`) |> 
+relocate(Gene, .before =  "ModelName")
+
 write_tsv(mageck_output, "data/mageck_output.tsv")
 
 mageck_output_sigs_ggplot <- mageck_output |>
