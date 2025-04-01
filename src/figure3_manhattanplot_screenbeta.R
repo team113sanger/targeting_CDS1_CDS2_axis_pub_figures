@@ -186,9 +186,10 @@ p <- ggplot(data, aes(x = ModelName, y = Beta)) +
                 force = 1.1,
                 box.padding = 0.25,
                 max.iter = 10000,         # Increase iterations for better placement
-                max.overlaps = Inf
+                max.overlaps = Inf,
+                fontface = "italic"
  ) +
-  labs(x = "\nModel Name", y = "Beta", shape = "Hit in > 6 models") +
+  labs(x = "\nModel Name", y = "Beta score", shape = "Hit in > 6 models") +
   geom_hline(yintercept = c(-0.5, 0.5), col = "black", linetype = "dashed", linewidth = 0.5) +
   theme_classic() +
   theme(
