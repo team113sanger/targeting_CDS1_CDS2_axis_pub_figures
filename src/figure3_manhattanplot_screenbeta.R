@@ -177,15 +177,16 @@ data
 set.seed(42)
 p <- ggplot(data, aes(x = ModelName, y = Beta)) +
   geom_point(aes(color = Beta, shape = factor(plot_shape)),
-    position = position_jitter(0.2), stroke = NA
+    position = position_jitter(0.2, seed = 42), stroke = NA
   ) +
   scale_color_gradient2(midpoint = 0, low = "#FF1A1A", mid = "white", high = "navyblue") +
  geom_text_repel(aes(label = gene_name),
+                position = position_jitter(0.2, seed = 42),
                 min.segment.length = 0,
                 size = 2.0,
-                force = 1.1,
-                box.padding = 0.25,
-                max.iter = 10000,         # Increase iterations for better placement
+                # force = 1.1,
+                # box.padding = 0.25,
+                # max.iter = 10000,         # Increase iterations for better placement
                 max.overlaps = Inf,
                 fontface = "italic"
  ) +
